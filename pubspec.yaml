@@ -92,7 +92,14 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
 
-  
+  futter_icons:
+       image_path:"assets/brgr.png"
+
+       android:"ic_launcher"
+       min_sdk_android:21
+       
+       ios : true
+       remove_alpha_ios: true
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
