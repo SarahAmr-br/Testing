@@ -7,6 +7,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/nav/nav.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
@@ -48,8 +49,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    var appTitle=dotenv.env['TITLE']!;
+    var primaryColor=Color(int.parse("0xff${dotenv.env['PRIMARY_COLOR']!.replaceAll("#","")}"));
     return MaterialApp.router(
-      title: 'POCs',
+      title: appTitle,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -57,6 +60,7 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(
+        primaryColor:primaryColor,
         brightness: Brightness.light,
         useMaterial3: false,
       ),
