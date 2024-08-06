@@ -3,9 +3,9 @@ definitions:
     S3_BUCKET_NAME: kode-staging # The name of your S3 bucket that have all of your clients assets.
     ANDROID_ASSETS_FOLDER: android_icons # The name of your folder in S3 bucket that have the client's Android assets from (/android/app/src/main/res/).
     IOS_ASSETS_FOLDER: ios_icons # The name of your folder in S3 bucket that have the client's iOS assets from (/ios/Runner/Assets.xcassets/).
-    AWS_ACCESS_KEY_ID: AKIAWIXFRF6HSWDZOKVA # Replace with your actual AWS access key ID
-    AWS_SECRET_ACCESS_KEY: zoWbHqixRswl0LxQCj9cn0EgjVmTVJW50dcFvonS # Replace with your actual AWS secret access key
-    AWS_DEFAULT_REGION: eu-central-1 # Replace with your actual AWS region
+    AWS_ACCESS_KEY_ID: your_aws_access_key_id # Replace with your actual AWS access key ID
+    AWS_SECRET_ACCESS_KEY: your_aws_secret_access_key # Replace with your actual AWS secret access key
+    AWS_DEFAULT_REGION: your_aws_region # Replace with your actual AWS region
   scripts:
     - &get_assets
       name: Get assets from AWS S3 bucket
@@ -27,6 +27,9 @@ workflows:
       vars:
         <<: *env_vars
         CLIENT_ID: your_client_id_value # Ensure CLIENT_ID is defined here
+        APP_NAME: your_app_name # Replace with your actual app name
+        PACKAGE_NAME: your_package_name # Replace with your actual package name
+        DOTENV: your_dotenv_base64_encoded_value # Replace with your actual base64 encoded .env file content
     scripts:
       - *get_assets # Getting client assets from S3 bucket
 
