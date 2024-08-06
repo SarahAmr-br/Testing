@@ -1,4 +1,4 @@
-definitions:     
+definitions:
   env_vars: &env_vars
     S3_BUCKET_NAME: kode-staging # The name of your S3 bucket that have all of your clients assets.
     ANDROID_ASSETS_FOLDER: android_icons # The name of your folder in S3 bucket that have the client's Android assets from (/android/app/src/main/res/).
@@ -13,10 +13,7 @@ definitions:
         aws s3 cp s3://$S3_BUCKET_NAME/$ASSETS_FOLDER.zip $ASSETS_FOLDER.zip
         unzip $ASSETS_FOLDER.zip -d $ASSETS_FOLDER
 
-
-# Builds will be triggered via Codemagic's REST API with the $CLIENT_ID variable and the WL_CLIENT_ID environment group in the payload
 workflows:
-    
   android-qa-workflow:
     name: Android client release QA
     instance_type: mac_mini_m1
@@ -28,11 +25,9 @@ workflows:
         - aws_credentials # Includes (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION)
       vars:
         <<: *env_vars
+        CLIENT_ID: your_client_id_value # Ensure CLIENT_ID is defined here
     scripts:
-      - *get_assets #Getting client assets from S3 bucket
-
-      # - name: Set up keystore
-      #   script: echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
+      - *get_assets # Getting client assets from S3 bucket
 
       - name: Change Android app name
         script: sed -i.bak "s/android:label=.*/android:label=\"$APP_NAME\"/g" android/app/src/main/AndroidManifest.xml
@@ -60,11 +55,7 @@ workflows:
           flutter build apk --release
     artifacts: 
       - build/**/outputs/**/*.aab
-      # - test-results/flutter.json
     publishing:
-      # google_play:
-      #   credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-      #   track: internal 
       email: 
         recipients:
           - sarah7amr@gmail.com
