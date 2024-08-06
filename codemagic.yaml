@@ -1,0 +1,71 @@
+definitions:     
+  env_vars: &env_vars
+    S3_BUCKET_NAME: cmwhitelabel # The name of your S3 bucket that have all of your clients assets.
+    ANDROID_ASSETS_FOLDER: res # The name of your folder in S3 bucket that have the client's Android assets from (/android/app/src/main/res/).
+    IOS_ASSETS_FOLDER: AppIcon.appiconset # The name of your folder in S3 bucket that have the client's iOS assets from (/ios/Runner/Assets.xcassets/).
+  scripts:
+    - &get_assets
+      name: Get assets from AWS S3 bucket
+      script: |
+        ASSETS_FOLDER=assets_${CLIENT_ID}
+        echo "ASSETS_FOLDER=$ASSETS_FOLDER" >> $CM_ENV
+        
+        aws s3 cp s3://$S3_BUCKET_NAME/$ASSETS_FOLDER.zip $ASSETS_FOLDER.zip
+        unzip $ASSETS_FOLDER.zip -d $ASSETS_FOLDER
+
+
+# Builds will be triggered via Codemagic's REST API with the $CLIENT_ID variable and the WL_CLIENT_ID environment group in the payload
+workflows:
+    
+  android-qa-workflow:
+    name: Android client release
+    instance_type: mac_mini_m1
+    labels:
+      - ${CLIENT_ID} # Helpful when you open your Codemagic's builds page 
+    environment:
+      groups:
+        - aws_credentials # Includes (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION)
+      vars:
+        <<: *env_vars
+    scripts:
+      - *get_assets #Getting client assets from S3 bucket
+
+      - name: Set up keystore
+        script: echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
+
+      - name: Change Android app name
+        script: sed -i.bak "s/android:label=.*/android:label=\"$APP_NAME\"/g" android/app/src/main/AndroidManifest.xml
+     
+      - name: Change Android package name
+        script: |
+          echo "android {  defaultConfig { applicationId '${PACKAGE_NAME}' }  }" > android/changePackage.gradle
+          echo "apply from: rootProject.file('changePackage.gradle')" >> android/app/build.gradle
+          
+      - name: Change Android icons
+        script: cp -r ./$ASSETS_FOLDER/$ANDROID_ASSETS_FOLDER/* ./android/app/src/main/res
+          
+      - name: Set client .env file
+        script: echo $DOTENV | base64 --decode > assets/client.env
+      
+      - name: Set main image # An image that being used in this sample project
+        script: cp -r ./$ASSETS_FOLDER/hero.png assets/hero.png
+          
+      - name: Install dependencies
+        script: flutter packages pub get
+      
+      - name: Flutter build aab and automatic versioning
+        script: |
+          BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks="$GOOGLE_PLAY_TRACK") + 1))
+          flutter build appbundle --release \
+          --build-name=1.0.$BUILD_NUMBER \
+          --build-number=$BUILD_NUMBER
+    artifacts: 
+      - build/**/outputs/**/*.aab
+      - test-results/flutter.json
+    publishing:
+      # google_play:
+      #   credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+      #   track: internal 
+      email: 
+        recipients:
+          - sarah7amr@gmail.com
