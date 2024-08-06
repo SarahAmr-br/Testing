@@ -3,6 +3,9 @@ definitions:
     S3_BUCKET_NAME: kode-staging # The name of your S3 bucket that have all of your clients assets.
     ANDROID_ASSETS_FOLDER: android_icons # The name of your folder in S3 bucket that have the client's Android assets from (/android/app/src/main/res/).
     IOS_ASSETS_FOLDER: ios_icons # The name of your folder in S3 bucket that have the client's iOS assets from (/ios/Runner/Assets.xcassets/).
+    AWS_ACCESS_KEY_ID: AKIAWIXFRF6HSWDZOKVA # Replace with your actual AWS access key ID
+    AWS_SECRET_ACCESS_KEY: zoWbHqixRswl0LxQCj9cn0EgjVmTVJW50dcFvonS # Replace with your actual AWS secret access key
+    AWS_DEFAULT_REGION: eu-central-1 # Replace with your actual AWS region
   scripts:
     - &get_assets
       name: Get assets from AWS S3 bucket
@@ -21,8 +24,6 @@ workflows:
       - ${CLIENT_ID} # Helpful when you open your Codemagic's builds page 
       - APK
     environment:
-      groups:
-        - aws_credentials # Includes (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION)
       vars:
         <<: *env_vars
         CLIENT_ID: your_client_id_value # Ensure CLIENT_ID is defined here
