@@ -8,33 +8,33 @@ definitions:
       name: Get assets from AWS S3 bucket
       script: |
       ASSETS_FOLDER="assets_${CLIENT_ID}"
-echo "ASSETS_FOLDER=$ASSETS_FOLDER" >> $CM_ENV
+      echo "ASSETS_FOLDER=$ASSETS_FOLDER" >> $CM_ENV
 
-# Output the S3 bucket name and assets folder
-echo "S3_BUCKET_NAME: $S3_BUCKET_NAME"
-echo "ASSETS_FOLDER: $ASSETS_FOLDER"
+      # Output the S3 bucket name and assets folder
+      echo "S3_BUCKET_NAME: $S3_BUCKET_NAME"
+      echo "ASSETS_FOLDER: $ASSETS_FOLDER"
 
-# Download the assets from S3
-echo "Downloading assets from S3..."
-aws s3 cp "s3://$S3_BUCKET_NAME/$ASSETS_FOLDER.zip" "$ASSETS_FOLDER.zip"
+      # Download the assets from S3
+      echo "Downloading assets from S3..."
+      aws s3 cp "s3://$S3_BUCKET_NAME/$ASSETS_FOLDER.zip" "$ASSETS_FOLDER.zip"
 
-# Check if the download was successful
-if [ $? -ne 0 ]; then
-  echo "Error: Failed to download assets from S3"
-  exit 1
-fi
+      # Check if the download was successful
+      if [ $? -ne 0 ]; then
+      echo "Error: Failed to download assets from S3"
+      exit 1
+      fi
 
-# Unzip the downloaded assets
-echo "Unzipping assets..."
-unzip "$ASSETS_FOLDER.zip" -d "$ASSETS_FOLDER"
+      # Unzip the downloaded assets
+      echo "Unzipping assets..."
+      unzip "$ASSETS_FOLDER.zip" -d "$ASSETS_FOLDER"
 
-# Check if the unzip was successful
-if [ $? -ne 0 ]; then
-  echo "Error: Failed to unzip assets"
-  exit 1
-fi
+      # Check if the unzip was successful
+     if [ $? -ne 0 ]; then
+     echo "Error: Failed to unzip assets"
+     exit 1
+     fi
 
-echo "Assets downloaded and unzipped successfully"
+     echo "Assets downloaded and unzipped successfully"
 
 
 # Builds will be triggered via Codemagic's REST API with the $CLIENT_ID variable and the WL_CLIENT_ID environment group in the payload
