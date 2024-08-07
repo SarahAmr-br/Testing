@@ -69,7 +69,7 @@ class _TestWidgetState extends State<TestWidget> {
                 onPressed: () async {
                   setAppLanguage(context, 'ar');
                 },
-              text: '${FFLocalizations.of(context).getText('xdc16opa')} $appName',
+              text: '$appName',
 
                 options: FFButtonOptions(
                   height: 40.0,
