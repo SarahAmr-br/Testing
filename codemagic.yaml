@@ -1,3 +1,5 @@
 workflows:
+  build_variant_1:
+    name: "Build Variant 1"
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
