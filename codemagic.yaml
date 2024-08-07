@@ -3,8 +3,8 @@ workflows:
     name: "Build Variant 1"
     environment:
       vars:
-        FLUTTER_APP_NAME: "kode1"
-        FLUTTER_APPLICATION_ID: "com.example.kode1"
+        FLUTTER_APP_NAME: "kode2"
+        FLUTTER_APPLICATION_ID: "com.example.kode2"
     scripts:
       - name: Update AndroidManifest.xml
         script: sed -i.bak "s/android:label=.*/android:label=\"$FLUTTER_APP_NAME\"/g" android/app/src/main/AndroidManifest.xml
