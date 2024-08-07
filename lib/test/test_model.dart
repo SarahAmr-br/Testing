@@ -13,7 +13,6 @@ import 'package:provider/provider.dart';
 class TestModel extends FlutterFlowModel<TestWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for ListView widget.
 
   PagingController<ApiPagingParams, dynamic>? listViewPagingController;
@@ -24,7 +23,6 @@ class TestModel extends FlutterFlowModel<TestWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     listViewPagingController?.dispose();
   }
 
