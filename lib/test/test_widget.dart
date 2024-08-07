@@ -11,8 +11,7 @@ import 'package:provider/provider.dart';
 import 'test_model.dart';
 export 'test_model.dart';
 
-const String appName = String.fromEnvironment('FLUTTER_APP_NAME', defaultValue: 'Default App Name');
-const String applicationId = String.fromEnvironment('FLUTTER_APPLICATION_ID', defaultValue: 'com.example.default');
+
 
 class TestWidget extends StatefulWidget {
   const TestWidget({super.key});
@@ -67,7 +66,7 @@ class _TestWidgetState extends State<TestWidget> {
                   setAppLanguage(context, 'ar');
                 },
                 text: FFLocalizations.of(context).getText(
-                  'xdc16opa' /* $appName */,
+                  'xdc16opa' /* club name */,
                 ),
                 options: FFButtonOptions(
                   height: 40.0,
