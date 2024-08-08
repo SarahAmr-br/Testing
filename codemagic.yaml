@@ -3,8 +3,8 @@ workflows:
     name: "Build Variant 1"
     environment:
       vars:
-        FLUTTER_APP_NAME: "kode3"
-        FLUTTER_APPLICATION_ID: "com.example.kode3"
+        FLUTTER_APP_NAME: "kayan"
+        FLUTTER_APPLICATION_ID: "com.example.kayan"
     scripts:
       - name: Update AndroidManifest.xml
         script: sed -i.bak "s/android:label=.*/android:label=\"$FLUTTER_APP_NAME\"/g" android/app/src/main/AndroidManifest.xml
@@ -14,17 +14,16 @@ workflows:
           echo "android { defaultConfig { applicationId '${FLUTTER_APPLICATION_ID}' } }" > android/changePackage.gradle
           echo "apply from: rootProject.file('changePackage.gradle')" >> android/app/build.gradle
       
+      - name: Update app icon
+        script: |
+          cp assets/logos/brgr_mdpi.png android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+          cp assets/logos/brgr_hdpi.png android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+          cp assets/logos/brgr_xhdpi.png android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+          cp assets/logos/brgr_xxhdpi.png android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+          cp assets/logos/brgr_xxxhdpi.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+      
       - name: Install dependencies
         script: flutter packages pub get
-
-      # Uncomment and adjust if needed
-      # - name: Update Info.plist
-      #   script: |
-      #     plutil -replace CFBundleName -string "$FLUTTER_APP_NAME" ios/Runner/Info.plist
-
-      # - name: Update build.gradle
-      #   script: |
-      #     sed -i '' 's/applicationId "[^"]*"/applicationId "$FLUTTER_APPLICATION_ID"/' android/app/build.gradle
 
       - name: Build APK
         script: flutter build apk --release --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID
@@ -32,3 +31,27 @@ workflows:
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
 
+  build_variant_2:
+    name: "Build Variant 2"
+    environment:
+      vars:
+        FLUTTER_APP_NAME: "Ryze"
+        FLUTTER_APPLICATION_ID: "com.example.ryze"
+    scripts:
+      - name: Update AndroidManifest.xml
+        script: sed -i.bak "s/android:label=.*/android:label=\"$FLUTTER_APP_NAME\"/g" android/app/src/main/AndroidManifest.xml
+      
+      - name: Change Android package name
+        script: |
+          echo "android { defaultConfig { applicationId '${FLUTTER_APPLICATION_ID}' } }" > android/changePackage.gradle
+          echo "apply from: rootProject.file('changePackage.gradle')" >> android/app/build.gradle
+    
+      
+      - name: Install dependencies
+        script: flutter packages pub get
+
+      - name: Build APK
+        script: flutter build apk --release --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
