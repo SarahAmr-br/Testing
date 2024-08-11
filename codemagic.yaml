@@ -14,7 +14,7 @@ workflows:
           echo "android { defaultConfig { applicationId '${FLUTTER_APPLICATION_ID}' } }" > android/changePackage.gradle
           echo "apply from: rootProject.file('changePackage.gradle')" >> android/app/build.gradle
       
-      - name: Update app icon
+      - name: Update app icon (Android)
         script: |
           cp assets/logos/brgr_mdpi.png android/app/src/main/res/mipmap-mdpi/ic_launcher.png
           cp assets/logos/brgr_hdpi.png android/app/src/main/res/mipmap-hdpi/ic_launcher.png
@@ -31,27 +31,27 @@ workflows:
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
 
-  build_variant_2:
-    name: "Build Variant 2"
+  build_ios:
+    name: "Build iOS"
     environment:
       vars:
-        FLUTTER_APP_NAME: "Ryze"
-        FLUTTER_APPLICATION_ID: "com.example.ryze"
+        FLUTTER_APP_NAME: "kayan"
+        FLUTTER_APPLICATION_ID: "com.example.kayan"
     scripts:
-      - name: Update AndroidManifest.xml
-        script: sed -i.bak "s/android:label=.*/android:label=\"$FLUTTER_APP_NAME\"/g" android/app/src/main/AndroidManifest.xml
-      
-      - name: Change Android package name
+      - name: Update iOS Bundle Identifier and Display Name
         script: |
-          echo "android { defaultConfig { applicationId '${FLUTTER_APPLICATION_ID}' } }" > android/changePackage.gradle
-          echo "apply from: rootProject.file('changePackage.gradle')" >> android/app/build.gradle
-    
-      
+          plutil -replace CFBundleIdentifier -string $FLUTTER_APPLICATION_ID ios/Runner/Info.plist
+          plutil -replace CFBundleDisplayName -string $FLUTTER_APP_NAME ios/Runner/Info.plist
+
+      - name: Update app icon (iOS)
+        script: |
+          cp assets/logos/AppIcon.appiconset/* ios/Runner/Assets.xcassets/AppIcon.appiconset/
+
       - name: Install dependencies
         script: flutter packages pub get
 
-      - name: Build APK
-        script: flutter build apk --release --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID
+      - name: Build iOS
+        script: flutter build ios --release --no-codesign --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID
 
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/ios/iphoneos/Runner.app
