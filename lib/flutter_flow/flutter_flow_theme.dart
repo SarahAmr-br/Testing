@@ -1,31 +1,29 @@
-// ignore_for_file: overridden_fields, annotate_overrides
+ // ignore_for_file: overridden_fields, annotate_overrides
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 const kThemeModeKey = '__theme_mode__';
 SharedPreferences? _prefs;
 
 abstract class FlutterFlowTheme {
-  static Future<void> initialize() async {
-    _prefs = await SharedPreferences.getInstance();
-  }
-
+  static Future initialize() async =>
+      _prefs = await SharedPreferences.getInstance();
   static ThemeMode get themeMode {
     final darkMode = _prefs?.getBool(kThemeModeKey);
     return darkMode == null
         ? ThemeMode.system
-        : darkMode ? ThemeMode.dark : ThemeMode.light;
+        : darkMode
+            ? ThemeMode.dark
+            : ThemeMode.light;
   }
 
-  static void saveThemeMode(ThemeMode mode) {
-    if (mode == ThemeMode.system) {
-      _prefs?.remove(kThemeModeKey);
-    } else {
-      _prefs?.setBool(kThemeModeKey, mode == ThemeMode.dark);
-    }
-  }
+  static void saveThemeMode(ThemeMode mode) => mode == ThemeMode.system
+      ? _prefs?.remove(kThemeModeKey)
+      : _prefs?.setBool(kThemeModeKey, mode == ThemeMode.dark);
 
   static FlutterFlowTheme of(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark
@@ -146,39 +144,185 @@ class LightModeTheme extends FlutterFlowTheme {
   final primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#000000');
   final secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
 
-  LightModeTheme() {
-    primary = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
-    secondary = Color(int.parse(secondaryColorHex.replaceFirst('#', '0xFF')));
-    tertiary = const Color(0xFFEE8B60);
-    alternate = const Color(0xFFF1F4F8);
-    primaryText = const Color(0xFF1D2429);
-    secondaryText = const Color(0xFF57636C);
-    primaryBackground = const Color(0xFFF1F4F8);
-    secondaryBackground = const Color(0xFFFFFFFF);
-    accent1 = const Color(0xFF616161);
-    accent2 = const Color(0xFF757575);
-    accent3 = const Color(0xFFE0E0E0);
-    accent4 = const Color(0xFFEEEEEE);
-    success = const Color(0xFF04A24C);
-    warning = const Color(0xFFFCDC0C);
-    error = const Color(0xFFE21C3D);
-    info = const Color(0xFF1C4494);
+  final primaryColor = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
+  final secondaryColor = Color(int.parse(secondaryColorHex.replaceFirst('#', '0xFF')));
 
-    primaryBtnText = const Color(0xFFFFFFFF);
-    lineColor = const Color(0xFFE0E3E7);
-    grayIcon = const Color(0xFF95A1AC);
-    gray200 = const Color(0xFFDBE2E7);
-    gray600 = const Color(0xFF6A6D73);
-    black600 = const Color(0xFF424B6D);
-    tertiary400 = const Color(0xFFB8C3CC);
-    textColor = const Color(0xFF101213);
-    maximumBlueGreen = const Color(0xFF4DB6AC);
-    plumpPurple = const Color(0xFF6D28D9);
-    platinum = const Color(0xFFE5E5E5);
-    ashGray = const Color(0xFFB8B8B8);
-    darkSeaGreen = const Color(0xFF9CC1B6);
-    customColor1 = const Color(0xFF9A9A9A);
-  }
+  late Color primary = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
+  late Color secondary = const Color(0xFF4B39EF);
+  late Color tertiary = const Color(0xFFEE8B60);
+  late Color alternate = const Color(0xFFF1F4F8);
+  late Color primaryText = const Color(0xFF1D2429);
+  late Color secondaryText = const Color(0xFF57636C);
+  late Color primaryBackground = const Color(0xFFF1F4F8);
+  late Color secondaryBackground = const Color(0xFFFFFFFF);
+  late Color accent1 = const Color(0xFF616161);
+  late Color accent2 = const Color(0xFF757575);
+  late Color accent3 = const Color(0xFFE0E0E0);
+  late Color accent4 = const Color(0xFFEEEEEE);
+  late Color success = const Color(0xFF04A24C);
+  late Color warning = const Color(0xFFFCDC0C);
+  late Color error = const Color(0xFFE21C3D);
+  late Color info = const Color(0xFF1C4494);
+
+  late Color primaryBtnText = Color(0xFFFFFFFF);
+  late Color lineColor = Color(0xFFE0E3E7);
+  late Color grayIcon = Color(0xFF95A1AC);
+  late Color gray200 = Color(0xFFDBE2E7);
+  late Color gray600 = Color(0xFF262D34);
+  late Color black600 = Color(0xFF090F13);
+  late Color tertiary400 = Color(0xFF39D2C0);
+  late Color textColor = Color(0xFF1E2429);
+  late Color maximumBlueGreen = Color(0xFF59C3C3);
+  late Color plumpPurple = Color(0xFF52489C);
+  late Color platinum = Color(0xFFEBEBEB);
+  late Color ashGray = Color(0xFFCAD2C5);
+  late Color darkSeaGreen = Color(0xFF84A98C);
+  late Color customColor1 = Color(0x9AFFFFFF);
+}
+
+abstract class Typography {
+  String get displayLargeFamily;
+  TextStyle get displayLarge;
+  String get displayMediumFamily;
+  TextStyle get displayMedium;
+  String get displaySmallFamily;
+  TextStyle get displaySmall;
+  String get headlineLargeFamily;
+  TextStyle get headlineLarge;
+  String get headlineMediumFamily;
+  TextStyle get headlineMedium;
+  String get headlineSmallFamily;
+  TextStyle get headlineSmall;
+  String get titleLargeFamily;
+  TextStyle get titleLarge;
+  String get titleMediumFamily;
+  TextStyle get titleMedium;
+  String get titleSmallFamily;
+  TextStyle get titleSmall;
+  String get labelLargeFamily;
+  TextStyle get labelLarge;
+  String get labelMediumFamily;
+  TextStyle get labelMedium;
+  String get labelSmallFamily;
+  TextStyle get labelSmall;
+  String get bodyLargeFamily;
+  TextStyle get bodyLarge;
+  String get bodyMediumFamily;
+  TextStyle get bodyMedium;
+  String get bodySmallFamily;
+  TextStyle get bodySmall;
+}
+
+class ThemeTypography extends Typography {
+  ThemeTypography(this.theme);
+
+  final FlutterFlowTheme theme;
+
+  String get displayLargeFamily => 'Outfit';
+  TextStyle get displayLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 57.0,
+      );
+  String get displayMediumFamily => 'Outfit';
+  TextStyle get displayMedium => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 45.0,
+      );
+  String get displaySmallFamily => 'Outfit';
+  TextStyle get displaySmall => GoogleFonts.getFont(
+        'Outfit',
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+        fontSize: 34.0,
+      );
+  String get headlineLargeFamily => 'Outfit';
+  TextStyle get headlineLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 32.0,
+      );
+  String get headlineMediumFamily => 'Outfit';
+  TextStyle get headlineMedium => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 28.0,
+      );
+  String get headlineSmallFamily => 'Outfit';
+  TextStyle get headlineSmall => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 20.0,
+      );
+  String get titleLargeFamily => 'Outfit';
+  TextStyle get titleLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 22.0,
+      );
+  String get titleMediumFamily => 'Outfit';
+  TextStyle get titleMedium => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 18.0,
+      );
+  String get titleSmallFamily => 'Outfit';
+  TextStyle get titleSmall => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 16.0,
+      );
+  String get labelLargeFamily => 'Outfit';
+  TextStyle get labelLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 14.0,
+      );
+  String get labelMediumFamily => 'Outfit';
+  TextStyle get labelMedium => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 12.0,
+      );
+  String get labelSmallFamily => 'Outfit';
+  TextStyle get labelSmall => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 11.0,
+      );
+  String get bodyLargeFamily => 'Outfit';
+  TextStyle get bodyLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
+      );
+  String get bodyMediumFamily => 'Outfit';
+  TextStyle get bodyMedium => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 14.0,
+      );
+  String get bodySmallFamily => 'Outfit';
+  TextStyle get bodySmall => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 14.0,
+      );
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
@@ -189,37 +333,73 @@ class DarkModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  DarkModeTheme() {
-    primary = const Color(0xFF4D6C78);
-    secondary = const Color(0xFF7F9A9F);
-    tertiary = const Color(0xFF121C25);
-    alternate = const Color(0xFF2D3C47);
-    primaryText = const Color(0xFFFFFFFF);
-    secondaryText = const Color(0xFF9B9B9B);
-    primaryBackground = const Color(0xFF121C25);
-    secondaryBackground = const Color(0xFF1F2937);
-    accent1 = const Color(0xFF1C1F1F);
-    accent2 = const Color(0xFF2D3C47);
-    accent3 = const Color(0xFF5B5B5B);
-    accent4 = const Color(0xFF6C757D);
-    success = const Color(0xFF009688);
-    warning = const Color(0xFFFFC107);
-    error = const Color(0xFFF44336);
-    info = const Color(0xFF1976D2);
+  late Color primary = const Color(0xFF4B39EF);
+  late Color secondary = const Color(0xFF4B39EF);
+  late Color tertiary = const Color(0xFFEE8B60);
+  late Color alternate = const Color(0xFF22282F);
+  late Color primaryText = const Color(0xFFFFFFFF);
+  late Color secondaryText = const Color(0xFF95A1AC);
+  late Color primaryBackground = const Color(0xFF1D2429);
+  late Color secondaryBackground = const Color(0xFF14181B);
+  late Color accent1 = const Color(0xFFEEEEEE);
+  late Color accent2 = const Color(0xFFE0E0E0);
+  late Color accent3 = const Color(0xFF757575);
+  late Color accent4 = const Color(0xFF616161);
+  late Color success = const Color(0xFF04A24C);
+  late Color warning = const Color(0xFFFCDC0C);
+  late Color error = const Color(0xFFE21C3D);
+  late Color info = const Color(0xFF1C4494);
 
-    primaryBtnText = const Color(0xFFFFFFFF);
-    lineColor = const Color(0xFF2C2F33);
-    grayIcon = const Color(0xFF7F8C8D);
-    gray200 = const Color(0xFF344952);
-    gray600 = const Color(0xFF2C2F33);
-    black600 = const Color(0xFF121C25);
-    tertiary400 = const Color(0xFF4B4B4B);
-    textColor = const Color(0xFFFFFFFF);
-    maximumBlueGreen = const Color(0xFF00796B);
-    plumpPurple = const Color(0xFF7E57C2);
-    platinum = const Color(0xFFB0BEC5);
-    ashGray = const Color(0xFFCFD8DC);
-    darkSeaGreen = const Color(0xFF004D40);
-    customColor1 = const Color(0xFF37474F);
-  }
+  late Color primaryBtnText = Color(0xFFFFFFFF);
+  late Color lineColor = Color(0xFF22282F);
+  late Color grayIcon = Color(0xFF95A1AC);
+  late Color gray200 = Color(0xFFDBE2E7);
+  late Color gray600 = Color(0xFF262D34);
+  late Color black600 = Color(0xFF090F13);
+  late Color tertiary400 = Color(0xFF39D2C0);
+  late Color textColor = Color(0xFF1E2429);
+  late Color maximumBlueGreen = Color(0xFF59C3C3);
+  late Color plumpPurple = Color(0xFF52489C);
+  late Color platinum = Color(0xFFEBEBEB);
+  late Color ashGray = Color(0xFFCAD2C5);
+  late Color darkSeaGreen = Color(0xFF84A98C);
+  late Color customColor1 = Color(0x9AFFFFFF);
+}
+
+extension TextStyleHelper on TextStyle {
+  TextStyle override({
+    String? fontFamily,
+    Color? color,
+    double? fontSize,
+    FontWeight? fontWeight,
+    double? letterSpacing,
+    FontStyle? fontStyle,
+    bool useGoogleFonts = true,
+    TextDecoration? decoration,
+    double? lineHeight,
+    List<Shadow>? shadows,
+  }) =>
+      useGoogleFonts
+          ? GoogleFonts.getFont(
+              fontFamily!,
+              color: color ?? this.color,
+              fontSize: fontSize ?? this.fontSize,
+              letterSpacing: letterSpacing ?? this.letterSpacing,
+              fontWeight: fontWeight ?? this.fontWeight,
+              fontStyle: fontStyle ?? this.fontStyle,
+              decoration: decoration,
+              height: lineHeight,
+              shadows: shadows,
+            )
+          : copyWith(
+              fontFamily: fontFamily,
+              color: color,
+              fontSize: fontSize,
+              letterSpacing: letterSpacing,
+              fontWeight: fontWeight,
+              fontStyle: fontStyle,
+              decoration: decoration,
+              height: lineHeight,
+              shadows: shadows,
+            );
 }
