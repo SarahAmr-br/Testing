@@ -3,8 +3,8 @@ workflows:
     name: "Build Variant 1"
     environment:
       vars:
-        FLUTTER_APP_NAME: "kayan"
-        FLUTTER_APPLICATION_ID: "com.example.kayan"
+        FLUTTER_APP_NAME: "kayan2"
+        FLUTTER_APPLICATION_ID: "com.example.kayan2"
         PRIMARY_COLOR: "#FF0000"  # Primary color
         SECONDARY_COLOR: "#00FF00" # Secondary color
     scripts:
@@ -28,7 +28,12 @@ workflows:
         script: flutter packages pub get
 
       - name: Build APK
-        script: flutter build apk --release --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID
+        script: |
+          flutter build apk --release \
+          --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME \
+          --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID \
+          --dart-define=PRIMARY_COLOR=$PRIMARY_COLOR \
+          --dart-define=SECONDARY_COLOR=$SECONDARY_COLOR
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
@@ -37,8 +42,10 @@ workflows:
     name: "Build iOS"
     environment:
       vars:
-        FLUTTER_APP_NAME: "kayan"
-        FLUTTER_APPLICATION_ID: "com.example.kayan"
+        FLUTTER_APP_NAME: "kayan2"
+        FLUTTER_APPLICATION_ID: "com.example.kayan2"
+        PRIMARY_COLOR: "#FF0000"  # Primary color
+        SECONDARY_COLOR: "#00FF00" # Secondary color
     scripts:
       - name: Update iOS Bundle Identifier and Display Name
         script: |
@@ -53,7 +60,12 @@ workflows:
         script: flutter packages pub get
 
       - name: Build iOS
-        script: flutter build ios --release --no-codesign --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID
+        script: |
+          flutter build ios --release --no-codesign \
+          --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME \
+          --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID \
+          --dart-define=PRIMARY_COLOR=$PRIMARY_COLOR \
+          --dart-define=SECONDARY_COLOR=$SECONDARY_COLOR
 
     artifacts:
       - build/ios/iphoneos/Runner.app
