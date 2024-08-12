@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-  final primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#FF5733');
-  final secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#33FF57');
+  final primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#000000');
+  final secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
 
   final primaryColor = Color(int.parse(primaryColorHex.replaceFirst('#', '0xff')));
   final secondaryColor = Color(int.parse(secondaryColorHex.replaceFirst('#', '0xff')));
