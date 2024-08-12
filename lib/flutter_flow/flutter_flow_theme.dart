@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+  final primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#000000');
+  final secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
 
 
 const kThemeModeKey = '__theme_mode__';
@@ -141,11 +143,8 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  final primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#000000');
-  final secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
-
-  final primaryColor = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
-  final secondaryColor = Color(int.parse(secondaryColorHex.replaceFirst('#', '0xFF')));
+  // final primaryColor = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
+  // final secondaryColor = Color(int.parse(secondaryColorHex.replaceFirst('#', '0xFF')));
 
   late Color primary = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
   late Color secondary = const Color(0xFF4B39EF);
