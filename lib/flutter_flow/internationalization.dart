@@ -116,6 +116,89 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بيت',
     },
   },
+  // List05Products
+  {
+    '571asw6g': {
+      'en': 'Pending Orders',
+      'ar': '',
+    },
+    '45kay6hb': {
+      'en': 'New Release',
+      'ar': '',
+    },
+    '839urq1i': {
+      'en': '\$126.20',
+      'ar': '',
+    },
+    '1j1kee7o': {
+      'en': 'Ordered on Feb 15, 2022',
+      'ar': '',
+    },
+    'j6qi0jeq': {
+      'en': 'This Month',
+      'ar': '',
+    },
+    'emqr3a8a': {
+      'en': 'New Release',
+      'ar': '',
+    },
+    'wtn8p1jw': {
+      'en': 'Feb 15, 2022',
+      'ar': '',
+    },
+    '85aduuv1': {
+      'en': '\$126.20',
+      'ar': '',
+    },
+    'ezio9p51': {
+      'en': 'Nike Airmax 90',
+      'ar': '',
+    },
+    'vtrndp74': {
+      'en': 'Feb 15, 2022',
+      'ar': '',
+    },
+    'x5d3m7fx': {
+      'en': '\$222.50',
+      'ar': '',
+    },
+    'atec6uf4': {
+      'en': 'Last Month',
+      'ar': '',
+    },
+    '4l2xv1lh': {
+      'en': 'Air Force 1',
+      'ar': '',
+    },
+    'mpezwvwf': {
+      'en': 'Feb 15, 2022',
+      'ar': '',
+    },
+    'bca1d57i': {
+      'en': '\$552.20',
+      'ar': '',
+    },
+    'wjvusaxo': {
+      'en': 'Lebron 19',
+      'ar': '',
+    },
+    't20h2fz4': {
+      'en': 'Feb 15, 2022',
+      'ar': '',
+    },
+    'kinerk2k': {
+      'en': '\$59.20',
+      'ar': '',
+    },
+    '8zywrv5v': {
+      'en': 'Order History',
+      'ar': '',
+    },
+    'wi2kaeg1': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // Miscellaneous
   {
     'pcwlao24': {

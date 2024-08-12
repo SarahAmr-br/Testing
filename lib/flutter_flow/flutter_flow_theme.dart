@@ -1,12 +1,9 @@
- // ignore_for_file: overridden_fields, annotate_overrides
+// ignore_for_file: overridden_fields, annotate_overrides
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-  const primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#FF0000');
-  const secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
-
 
 const kThemeModeKey = '__theme_mode__';
 SharedPreferences? _prefs;
@@ -143,10 +140,7 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  // final primaryColor = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
-  // final secondaryColor = Color(int.parse(secondaryColorHex.replaceFirst('#', '0xFF')));
-
-  late Color primary = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
+  late Color primary = const Color(0xFF5D5E5F);
   late Color secondary = const Color(0xFF4B39EF);
   late Color tertiary = const Color(0xFFEE8B60);
   late Color alternate = const Color(0xFFF1F4F8);
@@ -332,7 +326,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF4B39EF);
+  late Color primary = const Color(0xFFF1F4F8);
   late Color secondary = const Color(0xFF4B39EF);
   late Color tertiary = const Color(0xFFEE8B60);
   late Color alternate = const Color(0xFF22282F);

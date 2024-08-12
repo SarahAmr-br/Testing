@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context) => Container(
                 color: Colors.transparent,
                 child: Image.asset(
-                  'assets/images/ryan-parker-ucnZANGmyxM-unsplash.jpg',
+                  'assets/images/download.jpeg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -56,7 +57,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   builder: (context) => Container(
                     color: Colors.transparent,
                     child: Image.asset(
-                      'assets/images/ryan-parker-ucnZANGmyxM-unsplash.jpg',
+                      'assets/images/download.jpeg',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -67,6 +68,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Test',
               path: 'test',
               builder: (context, params) => TestWidget(),
+            ),
+            FFRoute(
+              name: 'List05Products',
+              path: 'list05Products',
+              builder: (context, params) => List05ProductsWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
