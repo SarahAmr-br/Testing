@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
   const primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#FF0000');
-  final secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
+  const secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
 
 
 const kThemeModeKey = '__theme_mode__';
