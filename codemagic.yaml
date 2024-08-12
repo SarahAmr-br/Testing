@@ -5,7 +5,7 @@ workflows:
       vars:
         FLUTTER_APP_NAME: "kayan22"
         FLUTTER_APPLICATION_ID: "com.example.kayan22"
-        PRIMARY_COLOR: "#FFFFFF"  # Primary color
+        PRIMARY_COLOR: "#FF0000"  # Primary color
         SECONDARY_COLOR: "#4B39EF" # Secondary color
     scripts:
       - name: Update AndroidManifest.xml
