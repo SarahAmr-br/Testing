@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
   final primaryColorHex = String.fromEnvironment('PRIMARY_COLOR', defaultValue: '#000000');
   final secondaryColorHex = String.fromEnvironment('SECONDARY_COLOR', defaultValue: '#FFFFFF');
 
-  final primaryColor = Color(int.parse(primaryColorHex.replaceFirst('#', '0xFF')));
+  final primaryColor = Color(primaryColorHex.replaceFirst('#', '0xFF'));
   final secondaryColor = Color(int.parse(secondaryColorHex.replaceFirst('#', '0xFF')));
 
 const kThemeModeKey = '__theme_mode__';
