@@ -12,6 +12,10 @@ import 'package:provider/provider.dart';
 import 'test_model.dart';
 export 'test_model.dart';
 
+
+const image= String.fromEnvironment('SPLASH', defaultValue: 'assets/images/splash.jpeg');
+
+
 class TestWidget extends StatefulWidget {
   const TestWidget({super.key});
 
@@ -134,7 +138,7 @@ class _TestWidgetState extends State<TestWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/splash.jpeg',
+                       image,
                         width: 300.0,
                         height: 200.0,
                         fit: BoxFit.cover,
