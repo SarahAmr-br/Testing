@@ -58,7 +58,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   builder: (context) => Container(
                     color: Colors.transparent,
                     child: Image.asset(
-                      String.fromEnvironment('SPLASH', defaultValue: 'assets/images/splash.jpeg'),
+                      image,
                       fit: BoxFit.cover,
                     ),
                   ),
