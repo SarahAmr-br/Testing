@@ -34,7 +34,7 @@ workflows:
           --dart-define=FLUTTER_APP_NAME=$FLUTTER_APP_NAME \
           --dart-define=FLUTTER_APPLICATION_ID=$FLUTTER_APPLICATION_ID \
           --dart-define=PRIMARY_COLOR=$PRIMARY_COLOR \
-          --dart-define=SECONDARY_COLOR=$SECONDARY_COLOR
+          --dart-define=SECONDARY_COLOR=$SECONDARY_COLOR \
           --dart-define=SPLASH=$SPLASH
 
     artifacts:
