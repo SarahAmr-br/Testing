@@ -59,7 +59,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   builder: (context) => Container(
                     color: Colors.transparent,
                     child: Image.asset(
-                     image,
+                     'assets/splash/download.jpeg',
                       fit: BoxFit.cover,
                     ),
                   ),
