@@ -18,8 +18,6 @@ export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
-  const image = String.fromEnvironment('SPLASH', defaultValue: 'assets/images/download.jpeg');
-
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -44,7 +42,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context) => Container(
                 color: Colors.transparent,
                 child: Image.asset(
-                  'assets/splash/download.jpeg',
+                  'assets/images/download.jpeg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -59,7 +57,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   builder: (context) => Container(
                     color: Colors.transparent,
                     child: Image.asset(
-                     'assets/splash/download.jpeg',
+                      'assets/images/download.jpeg',
                       fit: BoxFit.cover,
                     ),
                   ),
