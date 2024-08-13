@@ -7,7 +7,7 @@ workflows:
         FLUTTER_APPLICATION_ID: "com.example.kayan22"
         PRIMARY_COLOR: "#FF0000"  # Primary color
         SECONDARY_COLOR: "#00FF00" # Secondary color
-        SPLASH: "assets/splash/download.jpeg"
+        SPLASH: 'assets/splash/download.jpeg'
     scripts:
       - name: Update AndroidManifest.xml
         script: sed -i.bak "s/android:label=.*/android:label=\"$FLUTTER_APP_NAME\"/g" android/app/src/main/AndroidManifest.xml
