@@ -71,7 +71,6 @@ dependency_overrides:
 dev_dependencies:
   flutter_lints: 4.0.0
   lints: 4.0.0
-  flutter_launcher_icons: 0.12.0
 
   flutter_test:
     sdk: flutter
@@ -97,14 +96,7 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
 
-  # futter_icons:
-  #      image_path:"assets/logos/brgr_hdpi.png"
-
-  #      android:"ic_launcher"
-  #      min_sdk_android:21
-       
-       # ios: true
-       # remove_alpha_ios: true
+  
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -130,3 +122,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
