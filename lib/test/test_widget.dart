@@ -134,7 +134,7 @@ class _TestWidgetState extends State<TestWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/download.jpeg',
+                        'assets/images/splash.jpeg',
                         width: 300.0,
                         height: 200.0,
                         fit: BoxFit.cover,
