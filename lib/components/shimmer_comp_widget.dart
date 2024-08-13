@@ -89,7 +89,7 @@ class _ShimmerCompWidgetState extends State<ShimmerCompWidget>
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.asset(
-                'assets/images/download.jpeg',
+                'assets/images/shimmeer.gif',
                 width: 413.0,
                 height: 200.0,
                 fit: BoxFit.cover,
