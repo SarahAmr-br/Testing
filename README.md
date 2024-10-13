@@ -1,4 +1,4 @@
-# Travel App
+# Sample
 
 A new Flutter project.
 

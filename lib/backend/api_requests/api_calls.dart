@@ -30,7 +30,8 @@ class AuthenticationCall {
     );
   }
 
-  static String? token(dynamic response) => castToType<String>(getJsonField(
+  static String? authenticationToken(dynamic response) =>
+      castToType<String>(getJsonField(
         response,
         r'''$.token''',
       ));
@@ -65,7 +66,7 @@ class OrderIDCall {
     );
   }
 
-  static int? id(dynamic response) => castToType<int>(getJsonField(
+  static int? orderID(dynamic response) => castToType<int>(getJsonField(
         response,
         r'''$.id''',
       ));
@@ -116,21 +117,22 @@ class PaymentKeyCall {
     );
   }
 
-  static String? methodToken(dynamic response) =>
+  static String? paymentToken(dynamic response) =>
       castToType<String>(getJsonField(
         response,
         r'''$.token''',
       ));
 }
 
-class CallbackCall {
+class TestCall {
   static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
-      callName: 'Callback',
+      callName: 'test',
       apiUrl: 'https://accept.paymobsolutions.com/api/acceptance/post_pay',
-      callType: ApiCallType.GET,
+      callType: ApiCallType.POST,
       headers: {},
       params: {},
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -139,6 +141,11 @@ class CallbackCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? response(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 class ApiPagingParams {

@@ -29,77 +29,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const GuestLoginWidget(),
+      errorBuilder: (context, state) => const HomePageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const GuestLoginWidget(),
+          builder: (context, _) => const HomePageWidget(),
         ),
         FFRoute(
-          name: 'SetPinCode',
-          path: '/setPinCode',
-          builder: (context, params) => const SetPinCodeWidget(),
-        ),
-        FFRoute(
-          name: 'GuestLogin',
-          path: '/guestLogin',
-          builder: (context, params) => const GuestLoginWidget(),
-        ),
-        FFRoute(
-          name: 'GuestAccount',
-          path: '/guestAccount',
-          builder: (context, params) => const GuestAccountWidget(),
-        ),
-        FFRoute(
-          name: 'SetPinCode2',
-          path: '/setPinCode2',
-          builder: (context, params) => const SetPinCode2Widget(),
-        ),
-        FFRoute(
-          name: 'GuestPincode',
-          path: '/guestPincode',
-          builder: (context, params) => const GuestPincodeWidget(),
-        ),
-        FFRoute(
-          name: 'TurnNotifications',
-          path: '/turnNotifications',
-          builder: (context, params) => const TurnNotificationsWidget(),
-        ),
-        FFRoute(
-          name: 'EnableBiometric',
-          path: '/enableBiometric',
-          builder: (context, params) => const EnableBiometricWidget(),
-        ),
-        FFRoute(
-          name: 'NewCairoBranch',
-          path: '/newCairoBranch',
-          builder: (context, params) => const NewCairoBranchWidget(),
-        ),
-        FFRoute(
-          name: 'SetWalletPin',
-          path: '/setWalletPin',
-          builder: (context, params) => const SetWalletPinWidget(),
-        ),
-        FFRoute(
-          name: 'SuccessfulWalletPin',
-          path: '/successfulWalletPin',
-          builder: (context, params) => const SuccessfulWalletPinWidget(),
-        ),
-        FFRoute(
-          name: 'GParent',
-          path: '/gParent',
-          builder: (context, params) => const GParentWidget(),
-        ),
-        FFRoute(
-          name: 'MyCards',
-          path: '/myCards',
-          builder: (context, params) => const MyCardsWidget(),
-        ),
-        FFRoute(
-          name: 'MyCards2',
-          path: '/myCards2',
-          builder: (context, params) => const MyCards2Widget(),
+          name: 'HomePage',
+          path: '/homePage',
+          builder: (context, params) => const HomePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
