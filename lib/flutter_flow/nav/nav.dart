@@ -1,18 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '/index.dart';
-import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -37,45 +29,78 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.showSplashImage
-          ? Builder(
-              builder: (context) => Container(
-                color: Colors.transparent,
-                child: Image.asset(
-                  'assets/images/splash.jpeg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            )
-          : TestWidget(),
+      errorBuilder: (context, state) => const GuestLoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.showSplashImage
-              ? Builder(
-                  builder: (context) => Container(
-                    color: Colors.transparent,
-                    child: Image.asset(
-                      'assets/images/splash.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                )
-              : TestWidget(),
-          routes: [
-            FFRoute(
-              name: 'Test',
-              path: 'test',
-              builder: (context, params) => TestWidget(),
-            ),
-            FFRoute(
-              name: 'List05Products',
-              path: 'list05Products',
-              builder: (context, params) => List05ProductsWidget(),
-            )
-          ].map((r) => r.toRoute(appStateNotifier)).toList(),
+          builder: (context, _) => const GuestLoginWidget(),
         ),
+        FFRoute(
+          name: 'SetPinCode',
+          path: '/setPinCode',
+          builder: (context, params) => const SetPinCodeWidget(),
+        ),
+        FFRoute(
+          name: 'GuestLogin',
+          path: '/guestLogin',
+          builder: (context, params) => const GuestLoginWidget(),
+        ),
+        FFRoute(
+          name: 'GuestAccount',
+          path: '/guestAccount',
+          builder: (context, params) => const GuestAccountWidget(),
+        ),
+        FFRoute(
+          name: 'SetPinCode2',
+          path: '/setPinCode2',
+          builder: (context, params) => const SetPinCode2Widget(),
+        ),
+        FFRoute(
+          name: 'GuestPincode',
+          path: '/guestPincode',
+          builder: (context, params) => const GuestPincodeWidget(),
+        ),
+        FFRoute(
+          name: 'TurnNotifications',
+          path: '/turnNotifications',
+          builder: (context, params) => const TurnNotificationsWidget(),
+        ),
+        FFRoute(
+          name: 'EnableBiometric',
+          path: '/enableBiometric',
+          builder: (context, params) => const EnableBiometricWidget(),
+        ),
+        FFRoute(
+          name: 'NewCairoBranch',
+          path: '/newCairoBranch',
+          builder: (context, params) => const NewCairoBranchWidget(),
+        ),
+        FFRoute(
+          name: 'SetWalletPin',
+          path: '/setWalletPin',
+          builder: (context, params) => const SetWalletPinWidget(),
+        ),
+        FFRoute(
+          name: 'SuccessfulWalletPin',
+          path: '/successfulWalletPin',
+          builder: (context, params) => const SuccessfulWalletPinWidget(),
+        ),
+        FFRoute(
+          name: 'GParent',
+          path: '/gParent',
+          builder: (context, params) => const GParentWidget(),
+        ),
+        FFRoute(
+          name: 'MyCards',
+          path: '/myCards',
+          builder: (context, params) => const MyCardsWidget(),
+        ),
+        FFRoute(
+          name: 'MyCards2',
+          path: '/myCards2',
+          builder: (context, params) => const MyCards2Widget(),
+        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -238,7 +263,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

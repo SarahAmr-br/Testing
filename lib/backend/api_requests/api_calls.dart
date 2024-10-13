@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,11 +8,126 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class ProductsCall {
+class AuthenticationCall {
+  static Future<ApiCallResponse> call() async {
+    const ffApiRequestBody = '''
+{
+"api_key": "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TkRBNU9ETXNJbTVoYldVaU9pSnBibWwwYVdGc0luMC54RnFfLVFnV1B0RGh1N2ZjOE84REh0aVVnWGphRmdzS2Q4Q05XN0E5RUtlcFRGLU1EUWotVHRWODhtTF9nbGRaR2REWm5mZGdLQnlDN1hKNFdMOGRjdw=="}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Authentication',
+      apiUrl: 'https://accept.paymob.com/api/auth/tokens',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? token(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.token''',
+      ));
+}
+
+class OrderIDCall {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+    String? amount = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "auth_token": "$token",
+  "amount_cents": "$amount",
+  "delivery_needed": "false",
+  "items": []
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'OrderID',
+      apiUrl: 'https://accept.paymob.com/api/ecommerce/orders',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static int? id(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.id''',
+      ));
+}
+
+class PaymentKeyCall {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+    String? orderID = '',
+    String? amount = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "expiration": 3600,
+  "auth_token": "$token",
+  "order_id": "$orderID",
+  "integration_id": "3857298",
+  "amount_cents": "$amount",
+  "currency": "EGP",
+  "billing_data": {
+    "apartment": "NA",
+    "first_name": "Ammar",
+    "last_name": "Sadek",
+    "street": "NA",
+    "building": "NA",
+    "phone_number": "+96824480228",
+    "country": "NA",
+    "email": "AmmarSadek@gmail.com",
+    "floor": "NA",
+    "state": "NA",
+"city":"NA"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'PaymentKey',
+      apiUrl: 'https://accept.paymob.com/api/acceptance/payment_keys',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? methodToken(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.token''',
+      ));
+}
+
+class CallbackCall {
   static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
-      callName: 'products',
-      apiUrl: 'https://dummyjson.com/products',
+      callName: 'Callback',
+      apiUrl: 'https://accept.paymobsolutions.com/api/acceptance/post_pay',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -25,21 +139,6 @@ class ProductsCall {
       alwaysAllowBody: false,
     );
   }
-
-  static List? products(dynamic response) => getJsonField(
-        response,
-        r'''$.products''',
-        true,
-      ) as List?;
-  static List<String>? title(dynamic response) => (getJsonField(
-        response,
-        r'''$.products[:].title''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<String>(x))
-          .withoutNulls
-          .toList();
 }
 
 class ApiPagingParams {
